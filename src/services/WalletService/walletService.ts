@@ -58,5 +58,7 @@ export const WalletFactory = {
   [WalletId.WALLETCONNECT]: {
     init: ({ address, signMessageHandler }: WalletConnectWalletInitArgs) =>
       new WalletConnectWallet(address, signMessageHandler)
-  } as WalletService
+  } as WalletService,
+  // Not implemented
+  [WalletId.DESKTOP_SIGNER]: {} as WalletService
 };
