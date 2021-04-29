@@ -96,3 +96,4 @@ export { default as persistenceSlice } from './persistence.slice';
 export { getMemberships, membershipExpiryDate } from './membership.slice';
 export { setRates, getRates } from './rates.slice';
 export { trackAsset, getTrackedAssets } from './trackedAssets.slice';
+export { signerInit, getKeyPair } from './signer.slice';
