@@ -77,17 +77,17 @@ const AddAccountFlow = withRouter(({ history, match }) => {
       const handleAddition =
         newAccounts.length === 1
           ? () => {
-              displayNotification(NotificationTemplates.walletAdded, {
-                address: newAccounts[0].address
-              });
-              dispatch(scanTokens({ accounts: newAccounts }));
-              dispatch(fetchMemberships([newAccounts[0]]));
-            }
+            displayNotification(NotificationTemplates.walletAdded, {
+              address: newAccounts[0].address
+            });
+            dispatch(scanTokens({ accounts: newAccounts }));
+            dispatch(fetchMemberships([newAccounts[0]]));
+          }
           : () => {
-              displayNotification(NotificationTemplates.walletsAdded, { accounts: newAccounts });
-              dispatch(scanTokens());
-              dispatch(fetchMemberships(newAccounts));
-            };
+            displayNotification(NotificationTemplates.walletsAdded, { numOfAccounts: newAccounts.length });
+            dispatch(scanTokens());
+            dispatch(fetchMemberships(newAccounts));
+          };
       handleAddition();
       history.push(ROUTE_PATHS.DASHBOARD.path);
     }
