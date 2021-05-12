@@ -19,6 +19,7 @@ import {
   useDispatch,
   useSelector
 } from '@store';
+import { getStoreAccounts } from '@store/account.slice';
 import { translateRaw } from '@translations';
 import {
   Asset,
@@ -58,12 +59,7 @@ import { getNewDefaultAssetTemplateByNetwork, getTotalByAsset, useAssets } from 
 import { getAccountsAssetsBalances } from './BalanceService';
 import { useContacts } from './Contact';
 import { findMultipleNextUnusedDefaultLabels } from './Contact/helpers';
-import {
-  getStoreAccounts,
-  getTxsFromAccount,
-  isNotExcludedAsset,
-  isTokenMigration
-} from './helpers';
+import { getTxsFromAccount, isNotExcludedAsset, isTokenMigration } from './helpers';
 import { getNetworkById, useNetworks } from './Network';
 import { useSettings } from './Settings';
 
@@ -130,12 +126,7 @@ export const StoreProvider: React.FC = ({ children }) => {
   const [pendingTransactions, setPendingTransactions] = useState([] as IPendingTxReceipt[]);
   // We transform rawAccounts into StoreAccount. Since the operation is exponential to the number of
   // accounts, make sure it is done only when rawAccounts change.
-  const accounts = useMemo(() => getStoreAccounts(rawAccounts, assets, networks, contacts), [
-    rawAccounts,
-    assets,
-    contacts,
-    networks
-  ]);
+  const accounts = useSelector(getStoreAccounts(rawAccounts));
 
   const currentAccounts = useMemo(
     () => getDashboardAccounts(accounts, settings.dashboardAccounts),
